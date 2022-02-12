@@ -87,7 +87,7 @@ def Transform(img,bboxes,shearval,rotval,max_width,max_height):
 
     transformed_bboxes=np.concatenate((min_pts,max_pts),axis=1)
 
-    transformed_image = transform.warp(img, inverse_map=afine_tf)
+    transformed_image = transform.warp(np.asarray(img), inverse_map=afine_tf)
     out=img_as_ubyte(transformed_image)
     out=Image.fromarray(out)
     width,height=out.size

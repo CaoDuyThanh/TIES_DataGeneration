@@ -1,5 +1,6 @@
-# Rethinking Table Parsing using Graph Neural Networks
+**Note**: This repo is forked from repo [TIES_DataGeneration](https://github.com/hassan-mahmood/TIES_DataGeneration) of Hassan Mahmood :thumbsup: and refactor (maybe include some advance feature).
 
+# Table generator
 This is a repository containing data generation source code for the arxiv paper 1905.13391 ([link](https://arxiv.org/pdf/1905.13391.pdf)). This paper has been accepted into 
 ICDAR 2019. To cite the paper, use:
 
@@ -24,22 +25,55 @@ ICDAR 2019. To cite the paper, use:
 * unlv_distribution: a binary file that contains words distribution of UNLV dataset (types of words: numbers, alphabets and words containing special characters)
 
 
-
 ## How to run
+
+This API provides the following options to generate tables
+
+```
+usage: generate_data.py [-h] [--filesize FILESIZE] [--num_trecords NUM_TRECORDS] [--threads THREADS]
+                        [--outpath OUTPATH] [--imagespath IMAGESPATH] [--ocrpath OCRPATH]
+                        [--tablepath TABLEPATH] [--visualizeimgs VISUALIZEIMGS]
+                        [--visualizebboxes VISUALIZEBBOXES]
+
+Tool to generate synthetic tables data.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --filesize FILESIZE   Number of images to store in one tfrecord. Default: 1.
+  --num_trecords NUM_TRECORDS
+                        Number of trecords files. Defult: 1000.
+  --threads THREADS     Number of threads to run. More threads less time. Default: 1.
+  --outpath OUTPATH     Output directory to store generated tfrecords. Default: tfrecords/.
+  --imagespath IMAGESPATH
+                        Directory containing UNLV dataset images.
+  --ocrpath OCRPATH     Directory containing ground truths of characters in UNLV dataset.
+  --tablepath TABLEPATH
+                        Directory containing ground truths of tables in UNLV dataset.
+  --visualizeimgs VISUALIZEIMGS
+                        Store the generated images (along than tfrecords). Default: 0.
+  --visualizebboxes VISUALIZEBBOXES
+                        Store the images with bound boxes. Default: 0.
+```
+
+
 Use the following command to generate tfrecords:
 
+
+
+
+```
 python generate_data.py --filesize num_of_images_per_tfrecord --threads num_of_threads --outpath output_directory_to_store_tfrecords --imagespath path_to_UNLV_images --ocrpath path_to_OCR_groundtruth_UNLV --tablepath path_to_UNLV_tables_ground_truths --visualizeimgs 0_or_1 --visualizebboxes 0_or_1
+```
 
 
 where,
-num_of_images_per_tfrecord: Number of images to store in one tfrecord
-num_of_threads: Threads are used to process files in parallel. A single thread generates one single tfrecord file. So 10 threads will generate 10 tfrecord files in parallel.
-outpath: Output directory to store generated tfrecords
-visualizeimgs: If visualizeimgs=1, the generated images will be stored (along than tfrecords).
-visualizebboxes: If visualizebboxes=1, the bounding boxes will be draw to images and those images will be stored separately.
-
-imagespath: Directory containing UNLV dataset images
-ocrpath: Directory containing ground truths of characters in UNLV dataset
+- **num_of_images_per_tfrecord**: Number of images to store in one tfrecord
+- **num_of_threads**: Threads are used to process files in parallel. A single thread generates one single tfrecord file. So 10 threads will generate 10 tfrecord files in parallel.
+- **outpath**: Output directory to store generated tfrecords
+- **visualizeimgs**: If visualizeimgs=1, the generated images will be stored (along than tfrecords).
+- **visualizebboxes**: If visualizebboxes=1, the bounding boxes will be draw to images and those images will be stored separately.
+- **imagespath**: Directory containing UNLV dataset images
+- **ocrpath**: Directory containing ground truths of characters in UNLV dataset
 tablepath: Directory containing ground truths of tables in UNLV dataset
 
 You can download UNLV dataset from this link:
